@@ -1,0 +1,29 @@
+embedded
+	attractions
+		classification
+		id
+		images
+		locale
+		name
+		test
+		type
+		upcomingEvents
+		url
+	venues
+links
+classifications
+dates
+id
+images
+info
+locale
+name
+pleasenote
+priceranges
+promoter/s
+sales
+seatmap
+test
+type
+url
+	
