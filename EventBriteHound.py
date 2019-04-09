@@ -10,7 +10,7 @@ csv.write(columnTitleRow)
 
 # Headers and url for the HTTP requests.
 headers = {
-  'Authorization': 'Bearer 46C7DRU6HYXZWUPZSXPI',
+  'Authorization': 'Bearer <insert eventbrite api here>',
   'Content-Type': 'application/json'
 }
 
