@@ -33,6 +33,19 @@ name','venues','pleasenote', 'type', 'genre', 'subGenre', 'info','pleaseNote','s
 ### In order for this method to be implemented, we first needed a large batch of text data drawn from a relevant domain. After collecting the reviews, we pre-processed the file to return a list of words as tokens. The resulting data file held about 10,000 entries of 100+ words per entry, which gave us over a million words to use. From there, the tokens were trained with a neural network with a single hidden layer. The weights of the instances were then recorded to determine the degree of similarity between words. 
 ### Example with “drink”:
 ![](/Downloads/drinknlp.png )
+
+Performance Evaluation/Challenges:
+Currently our algorithm is designed for one-word queries, likened to the example above with the word “drink”, where we count the number of “similar words”, which are words that reach a certain level of similarity to the query. The way that our algorithm is designed, it will look for the highest rate of the occurrence of the query word per word within a description. This is definitely a start for us. With some tinkering of our model, it will be able to the description with the most occurrences of words like the query word. However, considering the goal of our project, this serves mostly as a foundation for us to work upon. 
+First off, queries are usually more than one word. We do plan to strip voice-recognized queries of words such as “the” and “a” which don’t give much insight. However, we will need to adjust our algorithm to be able to take into queries that are longer than one word. There are different avenues that we could take into regard with that. Algorithms such as the bag-of-words algorithm exist, or a more rudimentary and less effective method could be to run the current algorithm for each important word in the query.
+Also, 
+
+
+One of the challenges that we encountered was the establishment of an evaluation metric. We realized that the idea in our head could’ve been done without any practical implementation of machine learning algorithms. This caused us to shift the implementation of our algorithm to take this into account. 
+The main challenges that we are running into are related to the matter of evaluation. To know how good one’s model is, there is often an evaluation metric to measure how accurate that model is. However, with the way that our project is designed, it was difficult to establish what would be our form of evaluation. Our original proposal was to have Alexa be asked regarding events occuring in a certain area, and then to have it ask enough questions to be able to give recommendations. However, we were unclear of a good way to evaluate how “good” the event was. Some suggestions that came to mind were to look for the amount of people who went to similar events and to train off of that. That in itself would have been another problem to tackle, in part because a lot of the information that we deemed to be evaluation metrics were not available to us through the API. Through our considerations, we went with utilizing 
+	Also, in consideration of our project, we realized that our previous view of how the project could have been implemented would have been without any usage of machine learning algorithms. It could’ve been as simple as just looking for events with certain words in it. However
+	
+Something that we will also need to consider moving forward is if it will be possible to be able to tailor events to a particular user’s tastes, as well as if we would want to do that. 
+
  
 
 
