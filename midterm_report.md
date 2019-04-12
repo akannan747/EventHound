@@ -1,22 +1,13 @@
 # Midterm report
-### This report should in detail explain your Minimum Viable Project (baseline solution) and it should include an evaluation of how well your solution performs on the problem you're trying to solve. The report should clearly outline the progress you have made so far, as well as the challenges you are currently facing.
+## Introduction:
+### The objective of this project is to implement a personalized event finder onto Amazon Alexa that will scour popular event websites for events that would interest the user. Initially, we planned to personalize results and sync them with users’ calendars. However, due to data access limitations and privacy issues, we have altered the trajectory of this project to provide the best possible general recommendations of events. 
+![system architecture](https://github.com/akannan747/EventHound/blob/master/system%20architecture%201.PNG)
 
-### Also include a link to your Github repository where you have all the code base that you have produced in your project. 
-
- 
-
-### Here are a few things you should include and explain in your report
-
-### 1. Datasets you're using: Eventbrite and Ticketmaster
+### 1. Dataset sources: Eventbrite and Ticketmaster
+* [Dataset 1](https://github.com/akannan747/EventHound/blob/master/event_data2.csv)
+* [Dataset 2](https://github.com/akannan747/EventHound/blob/master/event_data4.csv)
 ### 2. Data analysis / EDA results: Expected outcome: Based on user query and the descriptions of the events, we hope to provide a top five list of events that the user would be interested in. Events considered would be within a five mile radius of the target location as well as within the requested time frame or within a month of the search. 
-### 3. Baseline models that are trained on your data you have (this might not be the best model, but should give you an idea about the next steps)
-### 4. A link to a working prototype of your full system, preferably with an interactive UI (with backend and frontend connected). Note, this might not be the final version or have all the functionalities - include screenshots or a link to a video of a screen recording where you walk through the system
-### 5. Performance evaluation. Answer the question: "Are you currently satisfied with your system's performance". Why / why not?)
-### 6. System Architecture Overview (in detail) -- if it's a system where a user interacts also outline the UX interaction flow + Code snippets to explain certain parts of the work done
-### 8. Key findings
-### 9. Bottlenecks / challenges
-
-## __TM to DF Code.ipynb__
+## [TM to DF Code.ipynb](https://github.com/akannan747/EventHound/blob/master/TM%20to%20DF%20Code.ipynb)
 ### Ticketmaster dataset
 ### __Method__: Web scraping
 ### Found events under postal code 90703, 94704
@@ -25,14 +16,29 @@ name','venues','pleasenote', 'type', 'genre', 'subGenre', 'info','pleaseNote','s
 
 ### __Results__: 27 listings of which all were related to music or arts and theatre. The three main events: The Secret Garden theatre showing, Shrek the Musical, and a series of concerts/music shows would not provide the variety necessary to encompass the range of events that would be sought after on an event finder, nor does it span people’s general interests. Also, these 27 listings would not be sufficient in training a model. 
 
-## word2vec.ipynb
+## [word2vec.ipynb](https://github.com/akannan747/EventHound/blob/master/word2vec.ipynb)
 #### Eventbrite dataset
 ### To supplement our data, we looked into Eventbrite, another event source with event descriptions, ratings, and events catered towards an expanded range of interests.
+
 ### Without being able to access private event attendance records and train them on individuals’ reviews from Ticketmaster alone, we would not be able to personalize event findings as we initially planned to. With this limited data dilemma in mind, we adjusted our feasible, short-term expected outcome to procure a list of the top five most popular events in the area, similar to a google query. We hoped that generalizing the search results and providing multiple options would increase the likelihood of users finding an event they would be interested in. 
+
 ### Therefore, for the next steps, we decided to use word2vec to compare user queries to the event descriptions to provide users the top search results. Our goal was to group similar words and train them to correlate to the average rating of an event. 
+
 ### In order for this method to be implemented, we first needed a large batch of text data drawn from a relevant domain. After collecting the reviews, we pre-processed the file to return a list of words as tokens. The resulting data file held about 10,000 entries of 100+ words per entry, which gave us over a million words to use. From there, the tokens were trained with a neural network with a single hidden layer. The weights of the instances were then recorded to determine the degree of similarity between words. 
-### Example with “drink”:
-![](/Downloads/drinknlp.png )
+
+### Example with “dance”:
+![example](https://github.com/akannan747/EventHound/blob/master/dance%20example.PNG )
+
+## 3. System Architecture Overview 
+For the frontend, we’re using a Flask application to handle user queries. We decided on the Flask framework because it is lightweight and faster to get started with compared to building it on our own. The frontend is basically a form which takes in a user’s name, a keyword, and a message. It should return the relevancy of the message relative to the word. The technique that we’re using to determine the meaning of the message is word2vec. 
+
+Working with data coming from a browser can be complicated and hard to read. That’s why we decided to use the WTForms library, which makes this process much easier. We have one class ReusableForm, which gets called each time the browser opens. The data gets submitted via the POST action and gets received via the GET action. 
+
+Right now, the word2vec implementation is working and we have trained/tested it on the Eventbrite dataset. Now that the model is ready, the next step is to encapsulate the similarity matching process into a function that takes in a String parameter and returns a relevancy score. This function will be called every time a user hits the Green submit form button. Once this is done, the frontend and backend will be connected.
+
+We have also designed the UI to have dynamic responses and alert users if their form isn’t filled out. All the styling is done on [hello.html](https://github.com/akannan747/EventHound/blob/master/Desktop/frontEnd/templates/hello.html).
+
+![UI](https://github.com/akannan747/EventHound/blob/master/UI.PNG)
 
 Performance Evaluation/Challenges:
 Currently our algorithm is designed for one-word queries, likened to the example above with the word “drink”, where we count the number of “similar words”, which are words that reach a certain level of similarity to the query. The way that our algorithm is designed, it will look for the highest rate of the occurrence of the query word per word within a description. This is definitely a start for us. With some tinkering of our model, it will be able to the description with the most occurrences of words like the query word. However, considering the goal of our project, this serves mostly as a foundation for us to work upon. 
