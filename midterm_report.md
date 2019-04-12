@@ -16,7 +16,7 @@ name','venues','pleasenote', 'type', 'genre', 'subGenre', 'info','pleaseNote','s
 
 ### __Results__: 27 listings of which all were related to music or arts and theatre. The three main events: The Secret Garden theatre showing, Shrek the Musical, and a series of concerts/music shows would not provide the variety necessary to encompass the range of events that would be sought after on an event finder, nor does it span people’s general interests. Also, these 27 listings would not be sufficient in training a model. 
 
-## [word2vec.ipynb](https://github.com/akannan747/EventHound/blob/master/word2vec.ipynb)
+## [Word2vec.ipynb](https://github.com/akannan747/EventHound/blob/master/word2vec.ipynb)
 #### Eventbrite dataset
 ### To supplement our data, we looked into Eventbrite, another event source with event descriptions, ratings, and events catered towards an expanded range of interests.
 
