@@ -9,22 +9,24 @@
 ### 2. Data analysis / EDA results: Expected outcome: Based on user query and the descriptions of the events, we hope to provide a top five list of events that the user would be interested in. Events considered would be within a five mile radius of the target location as well as within the requested time frame or within a month of the search. 
 ## [TM to DF Code.ipynb](https://github.com/akannan747/EventHound/blob/master/TM%20to%20DF%20Code.ipynb)
 ### Ticketmaster dataset
-### __Method__: Web scraping
-### Found events under postal code 90703, 94704
-### Variables to consider: 
+__Method__: Web scraping
+
+Found events under postal code 90703, 94704
+
+Variables to consider: 
 name','venues','pleasenote', 'type', 'genre', 'subGenre', 'info','pleaseNote','sales', 'classifications']
 
 ### __Results__: 27 listings of which all were related to music or arts and theatre. The three main events: The Secret Garden theatre showing, Shrek the Musical, and a series of concerts/music shows would not provide the variety necessary to encompass the range of events that would be sought after on an event finder, nor does it span people’s general interests. Also, these 27 listings would not be sufficient in training a model. 
 
 ## [Word2vec.ipynb](https://github.com/akannan747/EventHound/blob/master/word2vec.ipynb)
 #### Eventbrite dataset
-### To supplement our data, we looked into Eventbrite, another event source with event descriptions, ratings, and events catered towards an expanded range of interests.
+To supplement our data, we looked into Eventbrite, another event source with event descriptions, ratings, and events catered towards an expanded range of interests.
 
-### Without being able to access private event attendance records and train them on individuals’ reviews from Ticketmaster alone, we would not be able to personalize event findings as we initially planned to. With this limited data dilemma in mind, we adjusted our feasible, short-term expected outcome to procure a list of the top five most popular events in the area, similar to a google query. We hoped that generalizing the search results and providing multiple options would increase the likelihood of users finding an event they would be interested in. 
+Without being able to access private event attendance records and train them on individuals’ reviews from Ticketmaster alone, we would not be able to personalize event findings as we initially planned to. With this limited data dilemma in mind, we adjusted our feasible, short-term expected outcome to procure a list of the top five most popular events in the area, similar to a google query. We hoped that generalizing the search results and providing multiple options would increase the likelihood of users finding an event they would be interested in. 
 
-### Therefore, for the next steps, we decided to use word2vec to compare user queries to the event descriptions to provide users the top search results. Our goal was to group similar words and train them to correlate to the average rating of an event. 
+Therefore, for the next steps, we decided to use word2vec to compare user queries to the event descriptions to provide users the top search results. Our goal was to group similar words and train them to correlate to the average rating of an event. 
 
-### In order for this method to be implemented, we first needed a large batch of text data drawn from a relevant domain. After collecting the reviews, we pre-processed the file to return a list of words as tokens. The resulting data file held about 10,000 entries of 100+ words per entry, which gave us over a million words to use. From there, the tokens were trained with a neural network with a single hidden layer. The weights of the instances were then recorded to determine the degree of similarity between words. 
+In order for this method to be implemented, we first needed a large batch of text data drawn from a relevant domain. After collecting the reviews, we pre-processed the file to return a list of words as tokens. The resulting data file held about 10,000 entries of 100+ words per entry, which gave us over a million words to use. From there, the tokens were trained with a neural network with a single hidden layer. The weights of the instances were then recorded to determine the degree of similarity between words. 
 
 ### Example with “dance”:
 ![example](https://github.com/akannan747/EventHound/blob/master/dance%20example.PNG )
@@ -40,7 +42,7 @@ We have also designed the UI to have dynamic responses and alert users if their 
 
 ![UI](https://github.com/akannan747/EventHound/blob/master/UI.PNG)
 
-Performance Evaluation/Challenges:
+## Performance Evaluation/Challenges:
 Currently our algorithm is designed for one-word queries, likened to the example above with the word “drink”, where we count the number of “similar words”, which are words that reach a certain level of similarity to the query. The way that our algorithm is designed, it will look for the highest rate of the occurrence of these types of words within a description. This is definitely a start for us. With some tinkering of our model, it will be able to the description with the most occurrences of words like the query word. However, considering the goal of our project, this serves mostly as a foundation for us to work upon. 
 First off, queries are usually more than one word. We do plan to strip voice-recognized queries of words such as “the” and “a” which don’t give much insight. However, we will need to adjust our algorithm to be able to take in queries that are longer than one word. Examples of such queries are “jazz music” versus just “music” as a category. There are different avenues that we could take into regard with that. Algorithms such as the bag-of-words algorithm exist, or a more rudimentary and less effective method could be to run the current algorithm for each important word in the query. 
 Also, 
