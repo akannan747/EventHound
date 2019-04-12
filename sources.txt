@@ -3,3 +3,5 @@ https://stackoverflow.com/questions/13508043/tkinter-tkmessagebox-html-link
 https://pastebin.com/u0Z3CdtX
 https://stackoverflow.com/questions/49353034/python-tkinter-have-displayed-text-as-hyperlink
 https://stackoverflow.com/questions/50327234/adding-link-to-text-in-text-widget-in-tkinter
+https://medium.com/dreamcatcher-its-blog/making-an-stand-alone-executable-from-a-python-script-using-pyinstaller-d1df9170e263
+https://medium.freecodecamp.org/how-to-get-started-with-word2vec-and-then-how-to-make-it-work-d0a2fca9dad3
