@@ -16,7 +16,9 @@ Found events under postal code 90703, 94704
 Variables to consider: 
 name','venues','pleasenote', 'type', 'genre', 'subGenre', 'info','pleaseNote','sales', 'classifications']
 
-### __Results__: 27 listings of which all were related to music or arts and theatre. The three main events: The Secret Garden theatre showing, Shrek the Musical, and a series of concerts/music shows would not provide the variety necessary to encompass the range of events that would be sought after on an event finder, nor does it span people’s general interests. Also, these 27 listings would not be sufficient in training a model. 
+### __Results__: 
+
+27 listings of which all were related to music or arts and theatre. The three main events: The Secret Garden theatre showing, Shrek the Musical, and a series of concerts/music shows would not provide the variety necessary to encompass the range of events that would be sought after on an event finder, nor does it span people’s general interests. Also, these 27 listings would not be sufficient in training a model. 
 
 ## [Word2vec.ipynb](https://github.com/akannan747/EventHound/blob/master/word2vec.ipynb)
 #### Eventbrite dataset
