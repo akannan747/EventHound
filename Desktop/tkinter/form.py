@@ -7,6 +7,7 @@ import webbrowser
 from tkHyperlinkManager import *
 
 root = Tk()
+root.geometry("500x500")
 w = Label(root, text="EventHound")
 w.pack()
 
