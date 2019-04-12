@@ -11,7 +11,7 @@ root.geometry("1000x500")
 w = Label(root, text="EventHound")
 w.pack()
 
-messagebox.showinfo("Hello!", "Welcome to EventHound! Click ok to begin your event search.")
+messagebox.showinfo("Welcome to EventHound!", "Enter your search query here.")
 
 name = simpledialog.askstring("Name", "What is your name?")
 query_string = simpledialog.askstring("Query", "Please enter a query string. (our vocabulary is limited at the moment, test with 'dance')")
