@@ -1,0 +1,5 @@
+https://www.youtube.com/watch?v=mV5vZa9lkzc
+https://stackoverflow.com/questions/13508043/tkinter-tkmessagebox-html-link
+https://pastebin.com/u0Z3CdtX
+https://stackoverflow.com/questions/49353034/python-tkinter-have-displayed-text-as-hyperlink
+https://stackoverflow.com/questions/50327234/adding-link-to-text-in-text-widget-in-tkinter
