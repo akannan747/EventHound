@@ -141,6 +141,20 @@ class SessionEndedRequestHandler(AbstractRequestHandler):
             handler_input.request_envelope.request.reason))
         return handler_input.response_builder.response
 
+class MusicEvent(AbstractRequestHandler):
+    """Handler for Music Event Finder."""
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        seek = (is_intent_name("AMAZON.MusicEvent")(handler_input)or
+                is_intent_name("AMAZON.MusicGroup")(handler_input))
+        return seek
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        logger.info("In MusicEventHandler")
+        
+        logger.info("Here are the music events happening near you: {}".format(
+            handle(seek))
+        return handler_input.response_builder.response
 
 # Exception Handler
 class CatchAllExceptionHandler(AbstractExceptionHandler):
@@ -160,6 +174,7 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
             HELP_REPROMPT)
 
         return handler_input.response_builder.response
+ 
 
 
 # Request and Response loggers
@@ -185,12 +200,13 @@ sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(FallbackIntentHandler())
 sb.add_request_handler(SessionEndedRequestHandler())
 
+
 # Register exception handlers
 sb.add_exception_handler(CatchAllExceptionHandler())
 
 # TODO: Uncomment the following lines of code for request, response logs.
-# sb.add_global_request_interceptor(RequestLogger())
-# sb.add_global_response_interceptor(ResponseLogger())
+sb.add_global_request_interceptor(RequestLogger())
+sb.add_global_response_interceptor(ResponseLogger())
 
 # Handler name that is used on AWS lambda
 lambda_handler = sb.lambda_handler()
