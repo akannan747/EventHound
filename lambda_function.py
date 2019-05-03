@@ -3,7 +3,9 @@
 
 import random
 import logging
-import csv
+import word2vec2
+import gensim, pandas as pd, re
+
 from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_core.dispatch_components import (
     AbstractRequestHandler, AbstractExceptionHandler,
@@ -31,24 +33,25 @@ EXCEPTION_MESSAGE = "Sorry. I cannot help you with that."
 # TODO: Replace this data with your own.  You can find translations of this data at http://github.com/alexa/skill-sample-python-fact/lambda/data
 # =========================================================================================================================================
 
-# data = [
-#   'A year on Mercury is just 88 days long.',
-#   'Despite being farther from the Sun, Venus experiences higher temperatures than Mercury.',
-#   'Venus rotates counter-clockwise, possibly because of a collision in the past with an asteroid.',
-#   'On Mars, the Sun appears about half the size as it does on Earth.',
-#   'Earth is the only planet not named after a god.',
-#   'Jupiter has the shortest day of all the planets.',
-#   'The Milky Way galaxy will collide with the Andromeda Galaxy in about 5 billion years.',
-#   'The Sun contains 99.86% of the mass in the Solar System.',
-#   'The Sun is an almost perfect sphere.',
-#   'A total solar eclipse can happen once every 1 to 2 years. This makes them a rare event.',
-#   'Saturn radiates two and a half times more energy into space than it receives from the sun.',
-#   'The temperature inside the Sun can reach 15 million degrees Celsius.',
-#   'The Moon is moving approximately 3.8 cm away from our planet every year.',
-# ]
+data = [
+  'A year on Mercury is just 88 days long.',
+  'Despite being farther from the Sun, Venus experiences higher temperatures than Mercury.',
+  'Venus rotates counter-clockwise, possibly because of a collision in the past with an asteroid.',
+  'On Mars, the Sun appears about half the size as it does on Earth.',
+  'Earth is the only planet not named after a god.',
+  'Jupiter has the shortest day of all the planets.',
+  'The Milky Way galaxy will collide with the Andromeda Galaxy in about 5 billion years.',
+  'The Sun contains 99.86% of the mass in the Solar System.',
+  'The Sun is an almost perfect sphere.',
+  'A total solar eclipse can happen once every 1 to 2 years. This makes them a rare event.',
+  'Saturn radiates two and a half times more energy into space than it receives from the sun.',
+  'The temperature inside the Sun can reach 15 million degrees Celsius.',
+  'The Moon is moving approximately 3.8 cm away from our planet every year.',
+]
 
-with open('event_data4.csv') as csvfile:
-    readCSV = csv.reader(csvfile, delimiter=',')
+model = word2vec.model
+showbest5 = word2vec.showbest5
+descriptions = word2vec.descriptions
 
 # =========================================================================================================================================
 # Editing anything below this line might break your skill.
@@ -148,15 +151,21 @@ class MusicEvent(AbstractRequestHandler):
     """Handler for Music Event Finder."""
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
-        seek = (is_intent_name("AMAZON.MusicEvent")(handler_input)or
-                is_intent_name("AMAZON.MusicGroup")(handler_input))
+        seek = (is_intent_name("MusicEvent")(handler_input))
         return seek
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        logger.info("In MusicEventHandler")
-        
-        logger.info("Here are the music events happening near you: {}".format(
-            handle(seek))
+        music = get_slot_value(
+            handler_input=handler_input, slot_name="musictype")
+        #best5 = showbest5(model, music, descriptions)
+        #print(best5)
+        ## feed music variable into model
+
+        intro_text = "Here are the music events happening near you: "
+        card_text = "We'll use this for now"
+
+        handler_input.response_builder.speak(intro_text + music).set_card(
+            SimpleCard("Event Finder", card_text))
         return handler_input.response_builder.response
 
 # Exception Handler
@@ -177,7 +186,7 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
             HELP_REPROMPT)
 
         return handler_input.response_builder.response
- 
+
 
 
 # Request and Response loggers
