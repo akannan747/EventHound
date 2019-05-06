@@ -1,0 +1,2 @@
+model_checkpoint_path: "bigTFRNN"
+all_model_checkpoint_paths: "bigTFRNN"
